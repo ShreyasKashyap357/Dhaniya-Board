@@ -186,7 +186,7 @@
                                 <span class="badge bg-{{ 'success' if database_status == 'healthy' else 'warning' }}">{{ database_status.title() if database_status else 'Healthy' }}</span>
                             </div>
                             <div class="progress mt-1" style="height: 5px;">
-                                <div class="progress-bar bg-success" style="width: {{ database_uptime if database_uptime else '97' }}%"></div>
+                                <div class="progress-bar bg-success" data-width="{{ database_uptime if database_uptime else '97' }}"></div>
                             </div>
                         </div>
                         
@@ -196,7 +196,7 @@
                                 <span class="badge bg-{{ 'success' if api_status == 'running' else 'warning' }}">{{ api_status.title() if api_status else 'Running' }}</span>
                             </div>
                             <div class="progress mt-1" style="height: 5px;">
-                                <div class="progress-bar bg-success" style="width: {{ api_uptime if api_uptime else '99' }}%"></div>
+                                <div class="progress-bar bg-success" data-width="{{ api_uptime if api_uptime else '99' }}"></div>
                             </div>
                         </div>
                         
@@ -206,7 +206,7 @@
                                 <span class="badge bg-info">{{ storage_usage if storage_usage else '68' }}% Used</span>
                             </div>
                             <div class="progress mt-1" style="height: 5px;">
-                                <div class="progress-bar bg-info" style="width: {{ storage_usage if storage_usage else '68' }}%"></div>
+                                <div class="progress-bar bg-info" data-width="{{ storage_usage if storage_usage else '68' }}"></div>
                             </div>
                         </div>
                         
@@ -216,7 +216,7 @@
                                 <span class="badge bg-{{ 'success' if memory_status == 'normal' else 'warning' }}">{{ memory_status.title() if memory_status else 'Normal' }}</span>
                             </div>
                             <div class="progress mt-1" style="height: 5px;">
-                                <div class="progress-bar bg-success" style="width: {{ memory_usage if memory_usage else '72' }}%"></div>
+                                <div class="progress-bar bg-success" data-width="{{ memory_usage if memory_usage else '72' }}"></div>
                             </div>
                         </div>
                     </div>
@@ -564,6 +564,14 @@
                     }
                 }
             }
+        });
+
+        // Set progress bar widths from data attributes
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.progress-bar[data-width]').forEach(function(bar) {
+                const width = bar.getAttribute('data-width');
+                bar.style.width = width + '%';
+            });
         });
     </script>
 </body>

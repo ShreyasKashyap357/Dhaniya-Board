@@ -79,7 +79,7 @@
                             </div>
                             <div class="progress" style="height: 8px;">
                                 <div class="progress-bar dhaniya-bg" role="progressbar" 
-                                     style="width: {{ goal.progress }}%" 
+                                     data-width="{{ goal.progress }}" 
                                      aria-valuenow="{{ goal.progress }}" 
                                      aria-valuemin="0" 
                                      aria-valuemax="100"></div>
@@ -118,5 +118,15 @@
         {% endif %}
     </div>
 </div>
+
+<script>
+// Set progress bar widths from data attributes
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.progress-bar[data-width]').forEach(function(bar) {
+        const width = bar.getAttribute('data-width');
+        bar.style.width = width + '%';
+    });
+});
+</script>
 
 {% endblock %}
