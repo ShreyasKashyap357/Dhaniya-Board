@@ -245,3 +245,6 @@ if __name__ == '__main__':
                 pass
     
     app.run(debug=True)
+
+# Create app instance for production (Gunicorn compatibility)
+app = create_app()
